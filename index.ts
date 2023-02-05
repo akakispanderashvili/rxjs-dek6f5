@@ -52,7 +52,9 @@ function getUsers(): Observable<String[]> {
   const users: User[] = [
     { firstName: 'giorgi', lastName: 'bazerashvili', age: 25 },
     { firstName: 'meore', lastName: 'giorgi', age: 17 },
-    { firstName: 'third', lastName: 'user', age: 21 },
+    { firstName: 'valeri', lastName: 'valeria', age: 21 },
+    { firstName: 'giga', lastName: 'gigaia', age: 16 },
+    { firstName: 'giga', lastName: 'gigaiaze', age: 96 },
   ];
 
   return of(users).pipe(
@@ -65,6 +67,6 @@ function getUsers(): Observable<String[]> {
   );
 }
 
-// getUsers().subscribe((users) => {
-//   users.forEach((user) => console.log(user));
-// });
+getUsers().subscribe((users) => {
+  users.forEach((user) => console.log(user));
+});
