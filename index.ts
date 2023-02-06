@@ -1,4 +1,4 @@
-import { of, concat, map, interval, filter, Observable } from 'rxjs';
+import { of, concat, map, interval, filter, Observable, delay } from 'rxjs';
 
 // 1)))
 //
@@ -63,7 +63,8 @@ function getUsers(): Observable<String[]> {
       users.map(
         (user) => `${user.firstName} ${user.lastName}, ${user.age} years old`
       )
-    )
+    ),
+    delay(5000)
   );
 }
 
