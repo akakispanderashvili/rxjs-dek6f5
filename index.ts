@@ -1,4 +1,13 @@
-import { of, concat, map, interval, filter, Observable, delay } from 'rxjs';
+import {
+  of,
+  concat,
+  map,
+  interval,
+  filter,
+  Observable,
+  delay,
+  take,
+} from 'rxjs';
 
 // 1)))
 //
@@ -34,10 +43,11 @@ const c$ = concat(
 //
 const stream$ = interval(1000).pipe(
   filter((value) => value % 2 === 0),
+  take(6),
   map((value) => value * 2)
 );
 
-// stream$.subscribe((value) => console.log(value));
+stream$.subscribe((value) => console.log(value));
 
 // 3)))
 //
