@@ -7,6 +7,7 @@ import {
   Observable,
   delay,
   take,
+  concatWith,
 } from 'rxjs';
 
 // 1)))
@@ -15,28 +16,17 @@ import {
 const a$ = of(1, 'aa', 3);
 const b$ = of(4, 5, 'bb');
 
-const c$ = concat(
-  a$.pipe(
-    map((val) => {
-      if (typeof val === 'number') {
-        return val * 10;
-      } else if (typeof val === 'string') {
-        return val + val;
-      }
-    })
-  ),
-  b$.pipe(
-    map((val) => {
-      if (typeof val === 'number') {
-        return val * 10;
-      } else if (typeof val === 'string') {
-        return val + val;
-      }
-    })
-  )
+const c$ = a$.pipe(concatWith(b$)).pipe(
+  map((val) => {
+    if (typeof val === 'number') {
+      return val * 10;
+    } else if (typeof val === 'string') {
+      return val + val;
+    }
+  })
 );
 
-// c$.subscribe((val) => console.log(val));
+c$.subscribe((val) => console.log(val));
 
 // 2)))
 //
@@ -47,7 +37,7 @@ const stream$ = interval(1000).pipe(
   map((value) => value * 2)
 );
 
-stream$.subscribe((value) => console.log(value));
+// stream$.subscribe((value) => console.log(value));
 
 // 3)))
 //
@@ -78,6 +68,6 @@ function getUsers(): Observable<String[]> {
   );
 }
 
-getUsers().subscribe((users) => {
-  users.forEach((user) => console.log(user));
-});
+// getUsers().subscribe((users) => {
+//   users.forEach((user) => console.log(user));
+// });
